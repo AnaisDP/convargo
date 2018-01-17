@@ -33,7 +33,7 @@ var deliveries = [{
   'options': {
     'deductibleReduction': false
   },
-  'price': 0,
+  'price': (100 * 0.05) + (4 * 5),
   'commission': {
     'insurance': 0,
     'treasury': 0,
@@ -48,7 +48,7 @@ var deliveries = [{
   'options': {
     'deductibleReduction': true
   },
-  'price': 0,
+  'price': (650 * 0.1) + (12 * 8.5),
   'commission': {
     'insurance': 0,
     'treasury': 0,
@@ -63,7 +63,7 @@ var deliveries = [{
   'options': {
     'deductibleReduction': true
   },
-  'price': 0,
+  'price': (1250 * 0.10) + (30 * 10),
   'commission': {
     'insurance': 0,
     'treasury': 0,
