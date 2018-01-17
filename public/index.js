@@ -33,7 +33,7 @@ var deliveries = [{
   'options': {
     'deductibleReduction': false
   },
-  'price': (100 * 0.05) + (4 * 5),
+  'price': 0,
   'commission': {
     'insurance': 0,
     'treasury': 0,
@@ -48,7 +48,7 @@ var deliveries = [{
   'options': {
     'deductibleReduction': true
   },
-  'price': (650 * 0.1) + (12 * 8.5),
+  'price': 0,
   'commission': {
     'insurance': 0,
     'treasury': 0,
@@ -63,7 +63,7 @@ var deliveries = [{
   'options': {
     'deductibleReduction': true
   },
-  'price': (1250 * 0.10) + (30 * 10),
+  'price': 0,
   'commission': {
     'insurance': 0,
     'treasury': 0,
@@ -143,6 +143,29 @@ const actors = [{
     'amount': 0
   }]
 }];
+
+//Boucle qui parcourt et retourne les deliveries
+//truckerID
+
+
+while (deliveries){
+  var truckerID = '.deliveries[{truckerID}]';
+  var distance = '.deliveries[{distance}]';
+  var volume = '.deliveries[{volume}]';
+  if (truckerID == '.truckers[{id}]'){
+    var pricePerKm = '.truckers[{pricePerKm}]';
+    var pricePerVolume = '.truckers[{pricePerVolume}]';
+  }
+  var price = (distance * pricePerKm) + (volume * pricePerVolume);
+  Console.log(price);
+}
+
+
+
+
+
+
+
 
 console.log(truckers);
 console.log(deliveries);
