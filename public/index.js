@@ -146,47 +146,49 @@ const actors = [{
 
 
 
-function getPrice (deliveries, truckers){ 
-  var iD = 0;
-  var truckerID = [""];
-  var distance = [""];
-  var volume = [""];
-  var pricePerKm = 0
-  var pricePerVolume = 0;
-  var price = 0;
-  //Go through deliveries and gather information in the variables
-  for (i = 0; i < deliveries.length ; i++ ){
-    iD.push(deliveries.id);
-    truckerID.push(deliveries.truckerId);
-    distance.push(deliveries.distance);
-    volume.push(deliveries.distance);
 
-    if (truckerID[i] === truckers.id){
-      pricePerKm = truckers.id.pricePerKm;
-      pricePerVolume = truckers.id.pricePerVolume;
-      price = (distance[i] * pricePerKm) + (volume[i] * pricePerVolume);
-      
-      if(volume[i] >= 5){
-        price = price - (price*10/100);
+  
+  //Step 1
+  for (var i = 0; i < deliveries.length ; i++ ){
+    
+    for(var j = 0; j < truckers.length; j++){
+       
+       if (deliveries[i].truckerid === truckers[j].id){
+       deliveries[i].price = (deliveries[i].distance * truckers[j].pricePerKm) + (deliveries[i].volume * truckers[j].pricePerVolume);
       }
-      else if(volume[i] >= 10){
-        price = price - (price*30/100);
-      }
-      else if(volume[i] >= 25){
-        price = price - (price*50/100);
-      }
+    
+  
 
-      console.log('Price of shipping ' + iD[i] + ' is ' + price);
-    }
+  //Step 2
+    
+        var decreasing = 0;
+        if(deliveries[i].volume >= 25){
+          decreasing = 0.5;
+        }
+        else if(deliveries[i].volume >= 10){
+          decreasing = 0.7;
+        }
+        else if(deliveries[i].volume >= 5){
+          decreasing = 0.9;
+        }
+
+        truckers[j].pricePerVolume *= decreasing;
+        deliveries[i].price = (deliveries[i].distance * truckers[j].pricePerKm) + (deliveries[i].volume * truckers[j].pricePerVolume);
+
+  //Step 3
+
+        var com = deliveries[i].price * 0.3;
+
+        deliveries[i].commission.insurance = com / 2;
+        deliveries[i].commission.treasury = 1+ Math.Floor(deliveries[i].distance/500);
+        deliveries[i].commission.convargo = com - (deliveries[i].commission.insurance + deliveries[i].commission.treasury);
+
+  
+
   }
- return price;
-}
-
-while(deliveries){
-
 }
 
 
 console.log(truckers);
-console.log(deliveries);
+//console.log(deliveries);
 console.log(actors);
