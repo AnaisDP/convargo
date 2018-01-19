@@ -160,8 +160,8 @@ const actors = [{
   
 
   //Step 2
-    
-        var decreasing = 0;
+  
+        var decreasing = 1;
         if(deliveries[i].volume >= 25){
           decreasing = 0.5;
         }
@@ -180,15 +180,19 @@ const actors = [{
         var com = deliveries[i].price * 0.3;
 
         deliveries[i].commission.insurance = com / 2;
-        deliveries[i].commission.treasury = 1+ Math.Floor(deliveries[i].distance/500);
+        deliveries[i].commission.treasury = 1 + Math.floor(deliveries[i].distance / 500);
         deliveries[i].commission.convargo = com - (deliveries[i].commission.insurance + deliveries[i].commission.treasury);
 
-  
+  //Step 4
+
+        if (deliveries[i].options.deductibleReduction === true){
+          deliveries[i].commission.convargo += deliveries[i].volume;
+        }
 
   }
 }
 
 
 console.log(truckers);
-//console.log(deliveries);
+console.log(deliveries);
 console.log(actors);
