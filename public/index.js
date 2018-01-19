@@ -144,27 +144,30 @@ const actors = [{
   }]
 }];
 
-//Boucle qui parcourt et retourne les deliveries
-//truckerID
 
 
-while (deliveries){
-  var truckerID = '.deliveries[{truckerID}]';
-  var distance = '.deliveries[{distance}]';
-  var volume = '.deliveries[{volume}]';
-  if (truckerID == '.truckers[{id}]'){
-    var pricePerKm = '.truckers[{pricePerKm}]';
-    var pricePerVolume = '.truckers[{pricePerVolume}]';
+function getPrice (deliveries, truckers){ 
+  var iD = 0;
+  var truckerID = [""];
+  var distance = [""];
+  var volume = [""];
+  var pricePerKm = 0
+  var pricePerVolume = 0;
+  //Go through deliveries and gather information in the variables
+  for (i = 0; i < deliveries.length ; i++ ){
+    iD.push(deliveries.id);
+    truckerID.push(deliveries.truckerId);
+    distance.push(deliveries.distance);
+    volume.push(deliveries.distance);
+
+    if (truckerID[i] === truckers.id){
+      pricePerKm = truckers.id.pricePerKm;
+      pricePerVolume = truckers.id.pricePerVolume;
+      var price = (distance[i] * pricePerKm) + (volume[i] * pricePerVolume);
+      console.log('Price of delivery ' + iD[i] + ' is ' + price);
+    }
   }
-  var price = (distance * pricePerKm) + (volume * pricePerVolume);
-  Console.log(price);
 }
-
-
-
-
-
-
 
 
 console.log(truckers);
