@@ -153,6 +153,7 @@ function getPrice (deliveries, truckers){
   var volume = [""];
   var pricePerKm = 0
   var pricePerVolume = 0;
+  var price = 0;
   //Go through deliveries and gather information in the variables
   for (i = 0; i < deliveries.length ; i++ ){
     iD.push(deliveries.id);
@@ -163,10 +164,26 @@ function getPrice (deliveries, truckers){
     if (truckerID[i] === truckers.id){
       pricePerKm = truckers.id.pricePerKm;
       pricePerVolume = truckers.id.pricePerVolume;
-      var price = (distance[i] * pricePerKm) + (volume[i] * pricePerVolume);
-      console.log('Price of delivery ' + iD[i] + ' is ' + price);
+      price = (distance[i] * pricePerKm) + (volume[i] * pricePerVolume);
+      
+      if(volume[i] >= 5){
+        price = price - (price*10/100);
+      }
+      else if(volume[i] >= 10){
+        price = price - (price*30/100);
+      }
+      else if(volume[i] >= 25){
+        price = price - (price*50/100);
+      }
+
+      console.log('Price of shipping ' + iD[i] + ' is ' + price);
     }
   }
+ return price;
+}
+
+while(deliveries){
+
 }
 
 
